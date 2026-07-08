@@ -92,8 +92,7 @@ document.addEventListener("DOMContentLoaded", () => {
             e.stopPropagation();
             const id = bookmarkBtn.dataset.id;
             if (id) {
-                const isSaved = BookmarksManager.toggleBookmark(id);
-                updateBookmarkButtonUI(bookmarkBtn, isSaved);
+                BookmarksManager.toggleBookmark(id);
             }
         }
 
@@ -103,8 +102,7 @@ document.addEventListener("DOMContentLoaded", () => {
             e.stopPropagation();
             const id = likeBtn.dataset.id;
             if (id) {
-                const isLiked = BookmarksManager.toggleLike(id);
-                updateLikeButtonUI(likeBtn, isLiked);
+                BookmarksManager.toggleLike(id);
             }
         }
     });
@@ -123,7 +121,23 @@ document.addEventListener("DOMContentLoaded", () => {
             updateLikeButtonUI(btn, BookmarksManager.isLiked(id));
         }
     });
+
+    // Sync all matching elements surgically when changes occur (supports duplicate buttons)
+    window.addEventListener("bookmarksUpdated", (e) => {
+        const { id, bookmarked } = e.detail;
+        document.querySelectorAll(`.btn-bookmark-toggle[data-id="${id}"]`).forEach(btn => {
+            updateBookmarkButtonUI(btn, bookmarked);
+        });
+    });
+
+    window.addEventListener("likesUpdated", (e) => {
+        const { id, liked } = e.detail;
+        document.querySelectorAll(`.btn-like-toggle[data-id="${id}"]`).forEach(btn => {
+            updateLikeButtonUI(btn, liked);
+        });
+    });
 });
+
 
 function updateBookmarkButtonUI(btn, isBookmarked) {
     const icon = btn.querySelector("i");

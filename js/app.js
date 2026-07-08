@@ -9,41 +9,62 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // 2. Sticky Navbar and Scroll Progress
+    // 2. Throttled Sticky Navbar and Scroll Progress
     const navbar = document.querySelector(".navbar");
     const progressBar = document.getElementById("readingProgressBar");
     const backToTopBtn = document.getElementById("backToTop");
 
-    window.addEventListener("scroll", () => {
-        const scrollTop = window.scrollY;
+    let lastScrollY = 0;
+    let scrollTicking = false;
+
+    function updateScrollElements() {
+        const scrollTop = lastScrollY;
         const docHeight = document.documentElement.scrollHeight - window.innerHeight;
         
-        // Sticky Navbar styling
+        // Sticky Navbar styling - check before mutating classes
         if (navbar) {
             if (scrollTop > 50) {
-                navbar.classList.add("shadow", "py-2");
-                navbar.classList.remove("py-3");
+                if (!navbar.classList.contains("shadow")) {
+                    navbar.classList.add("shadow", "py-2");
+                    navbar.classList.remove("py-3");
+                }
             } else {
-                navbar.classList.remove("shadow", "py-2");
-                navbar.classList.add("py-3");
+                if (navbar.classList.contains("shadow")) {
+                    navbar.classList.remove("shadow", "py-2");
+                    navbar.classList.add("py-3");
+                }
             }
         }
 
         // Reading progress percentage
         if (progressBar && docHeight > 0) {
-            const scrollPercent = (scrollTop / docHeight) * 100;
+            const scrollPercent = Math.min((scrollTop / docHeight) * 100, 100);
             progressBar.style.width = scrollPercent + "%";
         }
 
-        // Back to Top button visibility
+        // Back to Top button visibility - check before mutating classes
         if (backToTopBtn) {
             if (scrollTop > 400) {
-                backToTopBtn.classList.add("show");
+                if (!backToTopBtn.classList.contains("show")) {
+                    backToTopBtn.classList.add("show");
+                }
             } else {
-                backToTopBtn.classList.remove("show");
+                if (backToTopBtn.classList.contains("show")) {
+                    backToTopBtn.classList.remove("show");
+                }
             }
         }
-    });
+        
+        scrollTicking = false;
+    }
+
+    window.addEventListener("scroll", () => {
+        lastScrollY = window.scrollY;
+        if (!scrollTicking) {
+            window.requestAnimationFrame(updateScrollElements);
+            scrollTicking = true;
+        }
+    }, { passive: true });
 
     // Smooth scroll back to top
     if (backToTopBtn) {
@@ -56,25 +77,37 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // 3. Stats Counter Animation (if present on page)
+    // 3. Stats Counter Animation via requestAnimationFrame
     const statsSection = document.getElementById("statisticsSection");
     if (statsSection) {
         const counters = statsSection.querySelectorAll(".counter-value");
-        const animationSpeed = 200; // lower is faster
+        const animationDuration = 1200; // 1.2 seconds
 
         const animateCounters = () => {
-            counters.forEach(counter => {
-                const target = parseInt(counter.dataset.target, 10);
-                const count = parseInt(counter.innerText, 10) || 0;
-                const increment = Math.ceil(target / animationSpeed);
+            let startTime = null;
 
-                if (count < target) {
-                    counter.innerText = Math.min(count + increment, target);
-                    setTimeout(animateCounters, 15);
+            const step = (timestamp) => {
+                if (!startTime) startTime = timestamp;
+                const progress = Math.min((timestamp - startTime) / animationDuration, 1);
+
+                counters.forEach(counter => {
+                    const target = parseInt(counter.dataset.target, 10);
+                    const currentVal = Math.floor(progress * target);
+                    counter.innerText = currentVal.toLocaleString() + (counter.dataset.suffix || "");
+                });
+
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
                 } else {
-                    counter.innerText = target.toLocaleString() + (counter.dataset.suffix || "");
+                    // Make sure target is exactly reached at completion
+                    counters.forEach(counter => {
+                        const target = parseInt(counter.dataset.target, 10);
+                        counter.innerText = target.toLocaleString() + (counter.dataset.suffix || "");
+                    });
                 }
-            });
+            };
+
+            window.requestAnimationFrame(step);
         };
 
         // Scroll listener to start counters when visible
@@ -86,7 +119,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     animated = true;
                 }
             });
-        }, { threshold: 0.5 });
+        }, { threshold: 0.3 });
 
         observer.observe(statsSection);
     }
@@ -230,7 +263,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 if (!article) return "";
                 return `
                     <div class="mb-3 d-flex align-items-center">
-                        <img src="${article.coverImage}" alt="${article.title}" class="rounded me-3" style="width: 50px; height: 50px; object-fit: cover;">
+                        <img src="${article.coverImage}" alt="${article.title}" class="rounded me-3" style="width: 50px; height: 50px; object-fit: cover;" loading="lazy">
                         <div class="overflow-hidden">
                             <h6 class="mb-0 text-truncate" style="font-size: 0.85rem; font-weight: 600;">
                                 <a href="${article.url}" class="text-decoration-none text-light-hover" style="color: var(--text-primary);">${article.title}</a>

@@ -43,16 +43,20 @@
     }
 }
 
+.blob {
+    will-change: transform;
+}
+
 .blob-1 {
-    animation: floatBlob1 15s infinite alternate ease-in-out;
+    animation: floatBlob1 35s infinite alternate ease-in-out;
 }
 
 .blob-2 {
-    animation: floatBlob2 18s infinite alternate ease-in-out;
+    animation: floatBlob2 45s infinite alternate ease-in-out;
 }
 
 .blob-3 {
-    animation: floatBlob3 12s infinite alternate ease-in-out;
+    animation: floatBlob3 30s infinite alternate ease-in-out;
 }
 
 /* Custom fade effects */
@@ -116,6 +120,7 @@
 
 /* Card hover animation tweaks */
 .article-card {
+    will-change: transform, box-shadow;
     transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), 
                 box-shadow 0.4s cubic-bezier(0.165, 0.84, 0.44, 1),
                 border-color 0.4s ease;

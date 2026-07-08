@@ -143,6 +143,19 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
+    // Debounce utility to prevent layout thrashing on fast keystrokes
+    function debounce(func, wait) {
+        let timeout;
+        return function executedFunction(...args) {
+            const later = () => {
+                clearTimeout(timeout);
+                func(...args);
+            };
+            clearTimeout(timeout);
+            timeout = setTimeout(later, wait);
+        };
+    }
+
     // Perform initial render
     function runFiltering() {
         const query = searchInput ? searchInput.value : "";
@@ -152,9 +165,9 @@ document.addEventListener("DOMContentLoaded", () => {
         SearchManager.renderArticles(filtered, catalogContainer);
     }
 
-    // Bind event listeners
+    // Bind event listeners with debouncing for text input
     if (searchInput) {
-        searchInput.addEventListener("input", runFiltering);
+        searchInput.addEventListener("input", debounce(runFiltering, 200));
     }
     
     if (sortSelect) {
@@ -180,8 +193,5 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Set initial run
     runFiltering();
-
-    // Re-sync UI state when bookmarks/likes update in storage
-    window.addEventListener("bookmarksUpdated", runFiltering);
-    window.addEventListener("likesUpdated", runFiltering);
 });
+

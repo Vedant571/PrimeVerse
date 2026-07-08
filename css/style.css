@@ -28,7 +28,7 @@
     --text-secondary: #a1a1aa;
     --text-muted: #71717a;
     --nav-bg: rgba(8, 5, 22, 0.75);
-    --glass-blur: blur(16px);
+    --glass-blur: blur(8px);
     --shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.5);
     --shadow-hover: 0 20px 48px 0 rgba(124, 58, 237, 0.15);
     

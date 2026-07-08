@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Mathematics Tools – PrimeVerse</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Explore interactive mathematical tools at PrimeVerse. Test prime numbers, generate primes, calculate prime factorization, and take the prime quiz.">
+    <meta name="keywords" content="prime checker, prime generator, prime factorization, prime quiz, online math tools">
+    
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Interactive Mathematics Tools – PrimeVerse">
+    <meta property="og:description" content="Explore interactive mathematical tools at PrimeVerse. Test prime numbers, generate primes, calculate prime factorization, and take the prime quiz.">
+    <meta property="og:image" content="assets/images/og-image.jpg">
+
+    <!-- Stylesheets -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    
+    <style>
+        .nav-pills .nav-link {
+            border-radius: 12px;
+            padding: 0.8rem 1.25rem;
+            color: var(--text-secondary);
+            font-weight: 600;
+            border: 1px solid var(--border-color);
+            background: rgba(255, 255, 255, 0.02);
+            transition: all 0.3s;
+            text-align: left;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-pills .nav-link:hover {
+            color: var(--primary);
+            background: rgba(124, 58, 237, 0.05);
+        }
+
+        .nav-pills .nav-link.active {
+            background: var(--accent-gradient);
+            color: #fff;
+            border-color: transparent;
+            box-shadow: 0 4px 15px rgba(124, 58, 237, 0.25);
+        }
+
+        [data-theme="light"] .nav-pills .nav-link {
+            background: rgba(0, 0, 0, 0.02);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Background Blobs -->
+    <div class="blob-container">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+
+    <!-- Navigation Header -->
+    <nav class="navbar navbar-expand-lg glass-nav sticky-top py-3">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="index.html">
+                <i class="bi bi-infinity me-2"></i> PrimeVerse
+            </a>
+            <button class="navbar-toggler border-0 text-white" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon" style="filter: invert(var(--theme-invert, 1));"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarContent">
+                <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="articles.html">Articles</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="tools.html">Interactive Tools</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contact</a>
+                    </li>
+                </ul>
+                <div class="d-flex align-items-center gap-3">
+                    <div class="theme-switch-container theme-toggle-btn">
+                        <div class="theme-switch-toggle">
+                            <i class="bi bi-moon-stars-fill"></i>
+                        </div>
+                    </div>
+                    <a href="tools.html" class="btn btn-premium rounded-pill px-4">Get Started</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header Banner -->
+    <header class="py-5 text-center">
+        <div class="container" data-aos="fade-up">
+            <h1 class="display-5 fw-extrabold mb-3">Interactive Mathematics Tools</h1>
+            <p class="text-secondary mx-auto mb-0" style="max-width: 600px;">
+                Learn number theory by running hands-on experiments. Test prime statuses, compute factorization trees, sieve ranges, and challenge yourself with mathematical trivia.
+            </p>
+        </div>
+    </header>
+
+    <!-- Main Workspace -->
+    <main class="container mb-5">
+        <div class="row">
+            <!-- Sidebar Navigation Tabs -->
+            <div class="col-lg-3 mb-4" data-aos="fade-right">
+                <div class="glass-panel p-3">
+                    <h5 class="fw-bold mb-3 px-2 text-white d-none d-lg-block">Toolbox Panel</h5>
+                    <div class="nav flex-column nav-pills gap-2" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                        <button class="nav-link active" id="tab-checker-btn" data-bs-toggle="pill" data-bs-target="#tab-checker" type="button" role="tab" aria-controls="tab-checker" aria-selected="true">
+                            <i class="bi bi-patch-question-fill"></i> Prime Checker
+                        </button>
+                        <button class="nav-link" id="tab-generator-btn" data-bs-toggle="pill" data-bs-target="#tab-generator" type="button" role="tab" aria-controls="tab-generator" aria-selected="false">
+                            <i class="bi bi-cpu-fill"></i> Prime Generator
+                        </button>
+                        <button class="nav-link" id="tab-factorizer-btn" data-bs-toggle="pill" data-bs-target="#tab-factorizer" type="button" role="tab" aria-controls="tab-factorizer" aria-selected="false">
+                            <i class="bi bi-diagram-3-fill"></i> Prime Factorizer
+                        </button>
+                        <button class="nav-link" id="tab-quiz-btn" data-bs-toggle="pill" data-bs-target="#tab-quiz" type="button" role="tab" aria-controls="tab-quiz" aria-selected="false">
+                            <i class="bi bi-mortarboard-fill"></i> Prime Quiz
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Content Area Panels -->
+            <div class="col-lg-9" data-aos="fade-left">
+                <div class="tab-content" id="v-pills-tabContent">
+                    
+                    <!-- TOOL 1: Prime Number Checker -->
+                    <div class="tab-pane fade show active" id="tab-checker" role="tabpanel" aria-labelledby="tab-checker-btn">
+                        <div class="glass-panel p-4 p-md-5 border" style="border-color: var(--border-color) !important;">
+                            <h3 class="fw-bold mb-1">Prime Number Checker</h3>
+                            <p class="text-secondary mb-4">Enter a positive integer below to check if it's prime and inspect its divisors.</p>
+                            
+                            <div class="mb-4">
+                                <label for="checkerNumberInput" class="form-label text-secondary fw-semibold">Enter Number:</label>
+                                <input type="number" id="checkerNumberInput" class="form-control glass-input py-3 text-center fs-4 fw-bold" placeholder="e.g. 997" min="0">
+                            </div>
+                            
+                            <button id="checkPrimeBtn" class="btn btn-premium w-100 rounded-pill py-3 fw-bold fs-5 mb-4">
+                                Check Prime <i class="bi bi-check2-circle ms-1"></i>
+                            </button>
+                            
+                            <div id="checkerResult" class="text-center">
+                                <p class="text-muted mb-0">Results will appear here.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- TOOL 2: Prime Number Generator -->
+                    <div class="tab-pane fade" id="tab-generator" role="tabpanel" aria-labelledby="tab-generator-btn">
+                        <div class="glass-panel p-4 p-md-5 border" style="border-color: var(--border-color) !important;">
+                            <h3 class="fw-bold mb-1">Prime Number Generator</h3>
+                            <p class="text-secondary mb-4">Generates all prime numbers present between a custom start and end value.</p>
+                            
+                            <div class="row g-3 mb-4">
+                                <div class="col-md-6">
+                                    <label for="genStartInput" class="form-label text-secondary fw-semibold">Start Number:</label>
+                                    <input type="number" id="genStartInput" class="form-control glass-input py-3 text-center fs-5 fw-bold" placeholder="e.g. 1" min="1">
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="genEndInput" class="form-label text-secondary fw-semibold">End Number:</label>
+                                    <input type="number" id="genEndInput" class="form-control glass-input py-3 text-center fs-5 fw-bold" placeholder="e.g. 100" min="1">
+                                </div>
+                            </div>
+                            
+                            <button id="generatePrimesBtn" class="btn btn-premium w-100 rounded-pill py-3 fw-bold fs-5 mb-4">
+                                Generate Primes <i class="bi bi-gear-fill ms-1"></i>
+                            </button>
+                            
+                            <div id="genResult">
+                                <p class="text-muted text-center mb-0">Outputs will appear here.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- TOOL 3: Prime Factorization Calculator -->
+                    <div class="tab-pane fade" id="tab-factorizer" role="tabpanel" aria-labelledby="tab-factorizer-btn">
+                        <div class="glass-panel p-4 p-md-5 border" style="border-color: var(--border-color) !important;">
+                            <h3 class="fw-bold mb-1">Prime Factorization Calculator</h3>
+                            <p class="text-secondary mb-4">Decompose any composite integer down to its prime components, forming a Factor Tree.</p>
+                            
+                            <div class="mb-4">
+                                <label for="factorInput" class="form-label text-secondary fw-semibold">Input Number (2 to 1,000,000):</label>
+                                <input type="number" id="factorInput" class="form-control glass-input py-3 text-center fs-4 fw-bold" placeholder="e.g. 120" min="2" max="1000000">
+                            </div>
+                            
+                            <button id="factorizeBtn" class="btn btn-premium w-100 rounded-pill py-3 fw-bold fs-5 mb-4">
+                                Factorize Number <i class="bi bi-diagram-3 ms-1"></i>
+                            </button>
+                            
+                            <div id="factorResult">
+                                <p class="text-muted text-center mb-0">Decomposition trees will appear here.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- TOOL 4: Prime Number Quiz -->
+                    <div class="tab-pane fade" id="tab-quiz" role="tabpanel" aria-labelledby="tab-quiz-btn">
+                        <div class="glass-panel p-4 p-md-5 border" style="border-color: var(--border-color) !important;">
+                            <h3 class="fw-bold mb-1">Prime Number Quiz</h3>
+                            <p class="text-secondary mb-4">Test your knowledge of primes and number theory with 5 multiple-choice questions.</p>
+                            
+                            <div id="quizCard" class="py-3">
+                                <!-- Quiz content injected dynamically by js/tools.js -->
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer py-5 mt-5">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6">
+                    <h5 class="fw-bold text-white mb-3"><i class="bi bi-infinity text-primary me-2"></i> PrimeVerse</h5>
+                    <p class="text-secondary">Redesigning mathematical education with interactive visual modules, advanced sieve filters, and cryptographic insights.</p>
+                    <div class="d-flex gap-2 mt-3">
+                        <a href="#" class="btn-icon"><i class="bi bi-facebook"></i></a>
+                        <a href="#" class="btn-icon"><i class="bi bi-twitter-x"></i></a>
+                        <a href="#" class="btn-icon"><i class="bi bi-linkedin"></i></a>
+                        <a href="#" class="btn-icon"><i class="bi bi-github"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-3 col-6 ms-lg-auto">
+                    <h6 class="text-white fw-bold mb-3">Links</h6>
+                    <ul class="list-unstyled d-flex flex-column gap-2" style="font-size: 0.95rem;">
+                        <li><a href="index.html" class="footer-link">Home</a></li>
+                        <li><a href="articles.html" class="footer-link">Articles</a></li>
+                        <li><a href="tools.html" class="footer-link">Interactive Tools</a></li>
+                        <li><a href="about.html" class="footer-link">About</a></li>
+                        <li><a href="contact.html" class="footer-link">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-md-3 col-6">
+                    <h6 class="text-white fw-bold mb-3">Math Tools</h6>
+                    <ul class="list-unstyled d-flex flex-column gap-2" style="font-size: 0.95rem;">
+                        <li><a href="tools.html?tool=checker" class="footer-link">Prime Checker</a></li>
+                        <li><a href="tools.html?tool=generator" class="footer-link">Prime Generator</a></li>
+                        <li><a href="tools.html?tool=factor" class="footer-link">Factorizer</a></li>
+                        <li><a href="tools.html?tool=quiz" class="footer-link">Math Quiz</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h6 class="text-white fw-bold mb-3">Contact Us</h6>
+                    <p class="text-secondary mb-1" style="font-size: 0.95rem;"><i class="bi bi-geo-alt me-2 text-primary"></i> 104 Fibonacci Way, Fractal City</p>
+                    <p class="text-secondary mb-1" style="font-size: 0.95rem;"><i class="bi bi-envelope me-2 text-primary"></i> contact@primeverse.edu</p>
+                    <p class="text-secondary" style="font-size: 0.95rem;"><i class="bi bi-telephone me-2 text-primary"></i> +1 (555) 777-1313</p>
+                </div>
+            </div>
+            <div class="border-top pt-4 mt-4 text-center" style="border-color: var(--border-color) !important; font-size: 0.9rem;">
+                <p class="mb-0 text-muted">&copy; 2026 PrimeVerse. Created with passion for mathematics. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <a href="#" id="backToTop" class="btn btn-premium rounded-circle d-flex align-items-center justify-content-center p-0" style="width: 44px; height: 44px; box-shadow: 0 4px 15px var(--primary-glow);"><i class="bi bi-arrow-up fs-5"></i></a>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    
+    <script src="js/theme.js"></script>
+    <script src="js/bookmark.js"></script>
+    <script src="js/tools.js"></script>
+    <script src="js/app.js"></script>
+    
+    <script>
+        // Custom URL router for Tools Page Tabs
+        document.addEventListener("DOMContentLoaded", () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const tool = urlParams.get("tool");
+            
+            if (tool) {
+                let targetBtnId = "";
+                if (tool === "checker") targetBtnId = "tab-checker-btn";
+                else if (tool === "generator") targetBtnId = "tab-generator-btn";
+                else if (tool === "factor") targetBtnId = "tab-factorizer-btn";
+                else if (tool === "quiz") targetBtnId = "tab-quiz-btn";
+                
+                if (targetBtnId) {
+                    const btn = document.getElementById(targetBtnId);
+                    if (btn) {
+                        // Activate tab via Bootstrap Pill trigger
+                        const trigger = new bootstrap.Tab(btn);
+                        trigger.show();
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

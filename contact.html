@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact PrimeVerse – Interactive Mathematics Blog</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Get in touch with the PrimeVerse team. Send us comments, feedback, mathematical inquiries, or code review requests.">
+    <meta name="keywords" content="contact math blog, contact developer, code feedback, math questions">
+    
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Contact PrimeVerse – Interactive Mathematics Blog">
+    <meta property="og:description" content="Get in touch with the PrimeVerse team. Send us comments, feedback, mathematical inquiries, or code review requests.">
+    <meta property="og:image" content="assets/images/og-image.jpg">
+
+    <!-- Stylesheets -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+    <!-- Background Blobs -->
+    <div class="blob-container">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+
+    <!-- Navigation Header -->
+    <nav class="navbar navbar-expand-lg glass-nav sticky-top py-3">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="index.html">
+                <i class="bi bi-infinity me-2"></i> PrimeVerse
+            </a>
+            <button class="navbar-toggler border-0 text-white" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon" style="filter: invert(var(--theme-invert, 1));"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarContent">
+                <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="articles.html">Articles</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="tools.html">Interactive Tools</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="contact.html">Contact</a>
+                    </li>
+                </ul>
+                <div class="d-flex align-items-center gap-3">
+                    <div class="theme-switch-container theme-toggle-btn">
+                        <div class="theme-switch-toggle">
+                            <i class="bi bi-moon-stars-fill"></i>
+                        </div>
+                    </div>
+                    <a href="tools.html" class="btn btn-premium rounded-pill px-4">Get Started</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header Banner -->
+    <header class="py-5 text-center">
+        <div class="container" data-aos="fade-up">
+            <h1 class="display-5 fw-extrabold mb-3">Get in Touch</h1>
+            <p class="text-secondary mx-auto mb-0" style="max-width: 600px;">
+                Have questions about our calculation engines? Want to request an article topic? Send us a message, and we'll get back to you.
+            </p>
+        </div>
+    </header>
+
+    <!-- Contact Content Workspace -->
+    <main class="container mb-5">
+        <div class="row g-4">
+            
+            <!-- Left Side: Form -->
+            <div class="col-lg-7" data-aos="fade-right">
+                <div class="glass-panel p-4 p-md-5 border" style="border-color: var(--border-color) !important;">
+                    <h3 class="fw-bold mb-4">Send a Message</h3>
+                    
+                    <form id="contactForm">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label for="contactName" class="form-label text-secondary fw-semibold">Your Name:</label>
+                                <input type="text" id="contactName" class="form-control glass-input" placeholder="e.g. John Doe" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="contactEmail" class="form-label text-secondary fw-semibold">Email Address:</label>
+                                <input type="email" id="contactEmail" class="form-control glass-input" placeholder="e.g. john@example.com" required>
+                            </div>
+                            <div class="col-12">
+                                <label for="contactSubject" class="form-label text-secondary fw-semibold">Subject:</label>
+                                <input type="text" id="contactSubject" class="form-control glass-input" placeholder="e.g. Feedback on Sieve Generator" required>
+                            </div>
+                            <div class="col-12">
+                                <label for="contactMessage" class="form-label text-secondary fw-semibold">Message:</label>
+                                <textarea id="contactMessage" rows="5" class="form-control glass-input" placeholder="Write your inquiry here..." required></textarea>
+                            </div>
+                            <div class="col-12 text-end">
+                                <button type="submit" class="btn btn-premium rounded-pill px-5 py-3 fw-bold">
+                                    Send Message <i class="bi bi-send-fill ms-1"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Right Side: Info & Maps -->
+            <div class="col-lg-5" data-aos="fade-left">
+                <div class="d-flex flex-column gap-4 h-100">
+                    
+                    <!-- Contact Details Card -->
+                    <div class="glass-panel p-4 border" style="border-color: var(--border-color) !important;">
+                        <h4 class="fw-bold mb-4">Contact Information</h4>
+                        
+                        <div class="d-flex align-items-start mb-3">
+                            <div class="btn-icon me-3 flex-shrink-0" style="width: 44px; height: 44px; background: rgba(124, 58, 237, 0.1); border-color: rgba(124, 58, 237, 0.2);"><i class="bi bi-geo-alt-fill text-primary"></i></div>
+                            <div>
+                                <h6 class="fw-bold mb-1">Our Location</h6>
+                                <p class="text-secondary mb-0" style="font-size: 0.9rem;">104 Fibonacci Way, Fractal City, FC 98124</p>
+                            </div>
+                        </div>
+
+                        <div class="d-flex align-items-start mb-3">
+                            <div class="btn-icon me-3 flex-shrink-0" style="width: 44px; height: 44px; background: rgba(124, 58, 237, 0.1); border-color: rgba(124, 58, 237, 0.2);"><i class="bi bi-envelope-fill text-primary"></i></div>
+                            <div>
+                                <h6 class="fw-bold mb-1">Email Address</h6>
+                                <p class="text-secondary mb-0" style="font-size: 0.9rem;">contact@primeverse.edu</p>
+                            </div>
+                        </div>
+
+                        <div class="d-flex align-items-start mb-4">
+                            <div class="btn-icon me-3 flex-shrink-0" style="width: 44px; height: 44px; background: rgba(124, 58, 237, 0.1); border-color: rgba(124, 58, 237, 0.2);"><i class="bi bi-telephone-fill text-primary"></i></div>
+                            <div>
+                                <h6 class="fw-bold mb-1">Phone Line</h6>
+                                <p class="text-secondary mb-0" style="font-size: 0.9rem;">+1 (555) 777-1313</p>
+                            </div>
+                        </div>
+
+                        <div class="border-top pt-3" style="border-color: var(--border-color) !important;">
+                            <h6 class="text-secondary mb-3">Connect on Socials:</h6>
+                            <div class="d-flex gap-2">
+                                <a href="#" class="btn-icon"><i class="bi bi-facebook"></i></a>
+                                <a href="#" class="btn-icon"><i class="bi bi-twitter-x"></i></a>
+                                <a href="#" class="btn-icon"><i class="bi bi-linkedin"></i></a>
+                                <a href="#" class="btn-icon"><i class="bi bi-github"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Map Placeholder Card -->
+                    <div class="glass-panel p-3 border flex-grow-1" style="border-color: var(--border-color) !important; min-height: 250px;">
+                        <h6 class="text-secondary fw-semibold mb-2 px-2">Global Campus Office</h6>
+                        
+                        <!-- Styled Map Graphic (SVG) -->
+                        <div class="w-100 h-100 rounded-4 overflow-hidden position-relative d-flex align-items-center justify-content-center" style="background: rgba(0,0,0,0.25); min-height: 200px;">
+                            <svg viewBox="0 0 400 200" width="100%" height="100%" class="opacity-60" style="position: absolute; top:0; left:0;">
+                                <defs>
+                                    <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse">
+                                        <path d="M 20 0 L 0 0 0 20" fill="none" stroke="var(--border-color)" stroke-width="0.75"/>
+                                    </pattern>
+                                </defs>
+                                <rect width="100%" height="100%" fill="url(#grid)" />
+                                <!-- Island shapes/roads representing map -->
+                                <path d="M50,150 Q100,80 180,140 T320,80" fill="none" stroke="var(--secondary)" stroke-width="3" opacity="0.3" stroke-dasharray="5,5"/>
+                                <path d="M10,80 Q120,180 220,70 T380,120" fill="none" stroke="var(--primary)" stroke-width="4" opacity="0.4"/>
+                                <path d="M200,10 L200,190" fill="none" stroke="var(--border-color)" stroke-width="2" opacity="0.2"/>
+                                
+                                <!-- Pin position -->
+                                <g transform="translate(220, 70)">
+                                    <circle cx="0" cy="0" r="15" fill="var(--primary)" opacity="0.2"/>
+                                    <circle cx="0" cy="0" r="8" fill="var(--primary)" opacity="0.4"/>
+                                    <circle cx="0" cy="0" r="4" fill="var(--primary)"/>
+                                    <path d="M-8,-10 L8,-10 L0,5 Z" fill="var(--primary)" opacity="0.8"/>
+                                </g>
+                            </svg>
+                            
+                            <div class="position-absolute bottom-0 start-0 m-3 px-3 py-1 glass-panel text-white fw-bold" style="font-size: 0.8rem; border-radius: 30px;">
+                                41.40338&deg; N, 2.17403&deg; E
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer py-5 mt-5">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6">
+                    <h5 class="fw-bold text-white mb-3"><i class="bi bi-infinity text-primary me-2"></i> PrimeVerse</h5>
+                    <p class="text-secondary">Redesigning mathematical education with interactive visual modules, advanced sieve filters, and cryptographic insights.</p>
+                    <div class="d-flex gap-2 mt-3">
+                        <a href="#" class="btn-icon"><i class="bi bi-facebook"></i></a>
+                        <a href="#" class="btn-icon"><i class="bi bi-twitter-x"></i></a>
+                        <a href="#" class="btn-icon"><i class="bi bi-linkedin"></i></a>
+                        <a href="#" class="btn-icon"><i class="bi bi-github"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-3 col-6 ms-lg-auto">
+                    <h6 class="text-white fw-bold mb-3">Links</h6>
+                    <ul class="list-unstyled d-flex flex-column gap-2" style="font-size: 0.95rem;">
+                        <li><a href="index.html" class="footer-link">Home</a></li>
+                        <li><a href="articles.html" class="footer-link">Articles</a></li>
+                        <li><a href="tools.html" class="footer-link">Interactive Tools</a></li>
+                        <li><a href="about.html" class="footer-link">About</a></li>
+                        <li><a href="contact.html" class="footer-link">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-md-3 col-6">
+                    <h6 class="text-white fw-bold mb-3">Math Tools</h6>
+                    <ul class="list-unstyled d-flex flex-column gap-2" style="font-size: 0.95rem;">
+                        <li><a href="tools.html?tool=checker" class="footer-link">Prime Checker</a></li>
+                        <li><a href="tools.html?tool=generator" class="footer-link">Prime Generator</a></li>
+                        <li><a href="tools.html?tool=factor" class="footer-link">Factorizer</a></li>
+                        <li><a href="tools.html?tool=quiz" class="footer-link">Math Quiz</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h6 class="text-white fw-bold mb-3">Contact Us</h6>
+                    <p class="text-secondary mb-1" style="font-size: 0.95rem;"><i class="bi bi-geo-alt me-2 text-primary"></i> 104 Fibonacci Way, Fractal City</p>
+                    <p class="text-secondary mb-1" style="font-size: 0.95rem;"><i class="bi bi-envelope me-2 text-primary"></i> contact@primeverse.edu</p>
+                    <p class="text-secondary" style="font-size: 0.95rem;"><i class="bi bi-telephone me-2 text-primary"></i> +1 (555) 777-1313</p>
+                </div>
+            </div>
+            <div class="border-top pt-4 mt-4 text-center" style="border-color: var(--border-color) !important; font-size: 0.9rem;">
+                <p class="mb-0 text-muted">&copy; 2026 PrimeVerse. Created with passion for mathematics. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <a href="#" id="backToTop" class="btn btn-premium rounded-circle d-flex align-items-center justify-content-center p-0" style="width: 44px; height: 44px; box-shadow: 0 4px 15px var(--primary-glow);"><i class="bi bi-arrow-up fs-5"></i></a>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    
+    <script src="js/theme.js"></script>
+    <script src="js/bookmark.js"></script>
+    <script src="js/app.js"></script>
+    
+    <script>
+        // Form Submit Visual Handlers
+        document.getElementById("contactForm").addEventListener("submit", (e) => {
+            e.preventDefault();
+            const name = document.getElementById("contactName").value;
+            const email = document.getElementById("contactEmail").value;
+            
+            showToast(`Thank you, ${name}! Your inquiry has been sent to contact@primeverse.edu.`, "success");
+            
+            document.getElementById("contactForm").reset();
+        });
+    </script>
+</body>
+</html>

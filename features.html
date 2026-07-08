@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Features of a Prime Number – PrimeVerse</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Discover the essential features of prime numbers, from basic definitions to the infinitude proof and the Fundamental Theorem of Arithmetic.">
+    <meta name="keywords" content="prime number properties, smallest prime, prime factorization, Euclid theorem, math lesson">
+    
+    <!-- Open Graph -->
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Features of a Prime Number – PrimeVerse">
+    <meta property="og:description" content="Discover the essential features of prime numbers, from basic definitions to the infinitude proof and the Fundamental Theorem of Arithmetic.">
+    <meta property="og:image" content="assets/images/features-cover.jpg">
+
+    <!-- Stylesheets -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- KaTeX CDN for math formulas -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    
+    <style>
+        .toc-link {
+            display: block;
+            padding: 0.35rem 0;
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.2s;
+            font-size: 0.9rem;
+        }
+        .toc-link:hover, .toc-link.active {
+            color: var(--primary);
+            padding-left: 4px;
+        }
+        .sticky-sidebar {
+            position: sticky;
+            top: 90px;
+        }
+        .article-body h2 {
+            font-size: 1.6rem;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+        .article-body p {
+            margin-bottom: 1.25rem;
+            color: var(--text-secondary);
+        }
+        .math-callout {
+            border-left: 4px solid var(--primary);
+            background: rgba(124, 58, 237, 0.05);
+            border-radius: 0 12px 12px 0;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Reading Progress Bar -->
+    <div class="progress-container">
+        <div id="readingProgressBar"></div>
+    </div>
+
+    <!-- Active Article Marker for History JS -->
+    <div id="currentArticleMarker" data-id="features" class="d-none"></div>
+
+    <!-- Background Blobs -->
+    <div class="blob-container">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+
+    <!-- Navigation Header -->
+    <nav class="navbar navbar-expand-lg glass-nav sticky-top py-3">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="index.html">
+                <i class="bi bi-infinity me-2"></i> PrimeVerse
+            </a>
+            <button class="navbar-toggler border-0 text-white" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon" style="filter: invert(var(--theme-invert, 1));"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarContent">
+                <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="articles.html">Articles</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="tools.html">Interactive Tools</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contact</a>
+                    </li>
+                </ul>
+                <div class="d-flex align-items-center gap-3">
+                    <div class="theme-switch-container theme-toggle-btn">
+                        <div class="theme-switch-toggle">
+                            <i class="bi bi-moon-stars-fill"></i>
+                        </div>
+                    </div>
+                    <a href="tools.html" class="btn btn-premium rounded-pill px-4">Get Started</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Article Hero Banner -->
+    <header class="py-5 position-relative overflow-hidden">
+        <div class="container" data-aos="fade-up">
+            <nav aria-label="breadcrumb" class="mb-3">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="index.html" class="footer-link">Home</a></li>
+                    <li class="breadcrumb-item"><a href="articles.html" class="footer-link">Articles</a></li>
+                    <li class="breadcrumb-item active text-primary" aria-current="page">Features of a Prime</li>
+                </ol>
+            </nav>
+            
+            <span class="badge-category mb-3 d-inline-block">Number Theory</span>
+            <h1 class="display-5 fw-extrabold mb-3">Features of a Prime Number</h1>
+            <p class="lead text-secondary mb-4" style="max-width: 800px;">
+                Dive into the fundamental features, mathematical definitions, and structural properties that make prime numbers the atomic elements of mathematics.
+            </p>
+
+            <div class="d-flex flex-wrap align-items-center justify-content-start gap-4 text-muted mb-4 card-meta">
+                <div class="d-flex align-items-center">
+                    <div class="avatar me-2 rounded-circle text-white d-flex align-items-center justify-content-center" style="width: 40px; height: 40px; background: var(--accent-gradient); font-weight: bold;">AT</div>
+                    <div>
+                        <h6 class="mb-0 text-white fw-bold">Prof. Alan Turing</h6>
+                        <small>Published July 1, 2026</small>
+                    </div>
+                </div>
+                <div>
+                    <span class="meta-item"><i class="bi bi-clock me-1"></i> 5 min read</span>
+                    <span class="meta-item"><i class="bi bi-eye me-1"></i> 1,240 views</span>
+                </div>
+                <div>
+                    <span class="badge badge-difficulty badge-easy">Easy</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Featured Image -->
+    <section class="mb-5">
+        <div class="container" data-aos="zoom-in">
+            <div class="glass-panel overflow-hidden p-0 rounded-4" style="height: 400px; max-height: 50vh;">
+                <img src="assets/images/features-cover.jpg" alt="Features of a Prime cover" class="w-100 h-100" style="object-fit: cover;">
+            </div>
+        </div>
+    </section>
+
+    <!-- Article Body and Sidebar -->
+    <main class="container mb-5">
+        <div class="row">
+            <!-- Article Body -->
+            <div class="col-lg-8" data-aos="fade-right">
+                <article class="article-body">
+                    <div class="glass-panel p-4 p-md-5">
+                        
+                        <h2 id="definition">1. Definition of a Prime</h2>
+                        <p>
+                            A <strong>prime number</strong> is defined as a natural number greater than 1 that has exactly two positive divisors: 1 and itself. Natural numbers greater than 1 that are not prime are called <strong>composite numbers</strong>.
+                        </p>
+                        <div class="math-callout p-3 mb-4">
+                            <strong>Definition:</strong> 
+                            Let \( p \in \mathbb{N} \). We say \( p \) is prime if and only if:
+                            \[ p > 1 \quad \text{and} \quad \forall d \in \mathbb{N}, \; (d \mid p \implies d = 1 \lor d = p) \]
+                        </div>
+
+                        <h2 id="smallest-prime">2. The Smallest Prime</h2>
+                        <p>
+                            The number <strong>2</strong> is the smallest prime number. Crucially, it is also the <strong>only even prime number</strong>. Every subsequent even number is divisible by 2, which automatically disqualifies them from being primes.
+                        </p>
+                        <p>
+                            This special property gives 2 a unique role in arithmetic and number theory. It is the starting node for many mathematical induction proofs and algorithms.
+                        </p>
+
+                        <h2 id="odd-primes">3. Odd Primes</h2>
+                        <p>
+                            Aside from the number 2, all other prime numbers are odd. As a consequence, they can be written as either:
+                            \[ 4k + 1 \quad \text{or} \quad 4k + 3 \]
+                            for some integer \( k \). This classification divides the odd primes into two distinct sets, which play significant roles in quadratic reciprocity and sum-of-squares theorems.
+                        </p>
+
+                        <h2 id="infinitude">4. Infinitude of Primes</h2>
+                        <p>
+                            There are infinitely many prime numbers. This was first proved by the ancient Greek mathematician Euclid in his work <em>Elements</em> (Book IX, Proposition 20).
+                        </p>
+                        <p>
+                            <strong>Euclid's Theorem Proof Summary:</strong>
+                            Suppose there were only a finite list of primes \( p_1, p_2, \dots, p_n \). Consider the product of all these primes plus one:
+                            \[ N = (p_1 \times p_2 \times \dots \times p_n) + 1 \]
+                            Now, \( N \) is either prime or composite:
+                        </p>
+                        <ul>
+                            <li>If \( N \) is prime, then we have found a prime not on our list (since \( N \) is larger than all of them).</li>
+                            <li>If \( N \) is composite, it must have some prime factor \( q \). If \( q \) were one of the primes on our list, it would have to divide the difference \( N - (p_1 \times p_2 \times \dots \times p_n) = 1 \), which is impossible. Thus, \( q \) must be a prime not on our list.</li>
+                        </ul>
+                        <p>
+                            In either case, our list of primes was incomplete, proving that prime numbers are indeed infinite.
+                        </p>
+
+                        <h2 id="fundamental-theorem">5. The Fundamental Theorem of Arithmetic</h2>
+                        <p>
+                            Prime numbers are the absolute building blocks of the integers. The <strong>Fundamental Theorem of Arithmetic</strong> states that every integer \( n > 1 \) can be represented uniquely as a product of prime numbers, up to the order of the factors.
+                        </p>
+                        <div class="math-callout p-3 mb-4">
+                            <strong>Theorem:</strong> 
+                            Every integer \( n > 1 \) can be uniquely factored as:
+                            \[ n = p_1^{a_1} p_2^{a_2} \dots p_k^{a_k} \]
+                            where \( p_1 < p_2 < \dots < p_k \) are prime numbers, and each exponent \( a_i \ge 1 \).
+                        </div>
+                        <p>
+                            This is why prime numbers are often described as the "atoms" of mathematics. By understanding the prime factorization of a number, we can deduce its divisors, totient counts, and other arithmetic properties.
+                        </p>
+
+                        <!-- Share, Like and Bookmark Buttons bottom -->
+                        <div class="d-flex flex-wrap justify-content-between align-items-center border-top pt-4 mt-5">
+                            <div class="d-flex gap-2">
+                                <button class="btn btn-premium-outline rounded-pill btn-like-toggle px-3" data-id="features" data-base-likes="145">
+                                    <i class="bi bi-heart"></i> Like (<span class="like-count">145</span>)
+                                </button>
+                                <button class="btn btn-premium-outline rounded-pill btn-bookmark-toggle px-3" data-id="features">
+                                    <i class="bi bi-bookmark"></i> Bookmark
+                                </button>
+                            </div>
+                            
+                            <div class="d-flex gap-2 align-items-center">
+                                <span class="text-muted" style="font-size: 0.9rem;">Share:</span>
+                                <button class="btn-icon btn-share-link" title="Copy Link"><i class="bi bi-link-45deg"></i></button>
+                                <a href="https://twitter.com/intent/tweet" target="_blank" class="btn-icon"><i class="bi bi-twitter-x"></i></a>
+                                <a href="https://facebook.com" target="_blank" class="btn-icon"><i class="bi bi-facebook"></i></a>
+                            </div>
+                        </div>
+
+                    </div>
+                </article>
+
+                <!-- Navigation Previous/Next -->
+                <div class="row g-3 my-4">
+                    <div class="col-md-6">
+                        <a href="index.html" class="w-100 text-decoration-none">
+                            <div class="glass-panel p-3 text-start hover-rotate">
+                                <small class="text-muted d-block"><i class="bi bi-arrow-left"></i> Previous</small>
+                                <span class="fw-bold text-white">Back to Homepage</span>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-md-6">
+                        <a href="range.html" class="w-100 text-decoration-none">
+                            <div class="glass-panel p-3 text-end hover-rotate">
+                                <small class="text-muted d-block">Next <i class="bi bi-arrow-right"></i></small>
+                                <span class="fw-bold text-white">Range & Distribution of Primes</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Comments UI -->
+                <section class="glass-panel p-4 p-md-5 mb-4" id="commentsSection" data-article-id="features">
+                    <h3 class="fw-bold mb-4">Discussion Board</h3>
+                    
+                    <form id="commentForm" class="mb-4">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <input type="text" id="commentName" class="form-control glass-input" placeholder="Your Name" required>
+                            </div>
+                            <div class="col-12">
+                                <textarea id="commentMessage" rows="4" class="form-control glass-input" placeholder="Join the discussion..." required></textarea>
+                            </div>
+                            <div class="col-12 text-end">
+                                <button type="submit" class="btn btn-premium rounded-pill px-4">Post Comment</button>
+                            </div>
+                        </div>
+                    </form>
+
+                    <div id="commentsList">
+                        <!-- Injected via app.js -->
+                    </div>
+                </section>
+            </div>
+
+            <!-- Sidebar -->
+            <div class="col-lg-4">
+                <div class="sticky-sidebar">
+                    
+                    <!-- Table of Contents -->
+                    <div class="glass-panel p-4 mb-4">
+                        <h5 class="fw-bold mb-3">Table of Contents</h5>
+                        <nav id="tableOfContents">
+                            <a href="#definition" class="toc-link"><i class="bi bi-hash text-primary"></i> Definition of a Prime</a>
+                            <a href="#smallest-prime" class="toc-link"><i class="bi bi-hash text-primary"></i> The Smallest Prime</a>
+                            <a href="#odd-primes" class="toc-link"><i class="bi bi-hash text-primary"></i> Odd Primes</a>
+                            <a href="#infinitude" class="toc-link"><i class="bi bi-hash text-primary"></i> Infinitude of Primes</a>
+                            <a href="#fundamental-theorem" class="toc-link"><i class="bi bi-hash text-primary"></i> Fundamental Theorem</a>
+                        </nav>
+                    </div>
+
+                    <!-- Author Card -->
+                    <div class="glass-panel p-4 mb-4 text-center">
+                        <div class="avatar rounded-circle text-white d-flex align-items-center justify-content-center mx-auto mb-3" style="width: 70px; height: 70px; background: var(--accent-gradient); font-size: 1.6rem; font-weight: bold;">
+                            AT
+                        </div>
+                        <h5 class="fw-bold mb-1">Prof. Alan Turing</h5>
+                        <p class="text-muted" style="font-size: 0.85rem;">Mathematical Biologist & Computer Scientist</p>
+                        <p class="text-secondary mb-0" style="font-size: 0.85rem;">
+                            Alan works on number theory computations, decoding systems, and biological pattern structures.
+                        </p>
+                    </div>
+
+                    <!-- Related Articles -->
+                    <div class="glass-panel p-4 mb-4">
+                        <h5 class="fw-bold mb-3">Related Articles</h5>
+                        <div class="d-flex flex-column gap-3">
+                            <div class="d-flex align-items-center">
+                                <img src="assets/images/range-cover.jpg" class="rounded me-2" style="width: 50px; height: 50px; object-fit: cover;">
+                                <div>
+                                    <h6 class="mb-0" style="font-size: 0.85rem; font-weight: 600;"><a href="range.html" class="text-white footer-link text-decoration-none">Range & Distribution</a></h6>
+                                    <small class="text-muted" style="font-size: 0.75rem;">Advanced Math &bull; 8m</small>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <img src="assets/images/cryptography-cover.jpg" class="rounded me-2" style="width: 50px; height: 50px; object-fit: cover;">
+                                <div>
+                                    <h6 class="mb-0" style="font-size: 0.85rem; font-weight: 600;"><a href="cryptography.html" class="text-white footer-link text-decoration-none">Primes in Cryptography</a></h6>
+                                    <small class="text-muted" style="font-size: 0.75rem;">Cryptography &bull; 12m</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Recently Viewed -->
+                    <div class="glass-panel p-4">
+                        <h5 class="fw-bold mb-3">Recently Viewed</h5>
+                        <div id="recentArticlesList">
+                            <!-- Injected via app.js -->
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer py-5">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6">
+                    <h5 class="fw-bold text-white mb-3"><i class="bi bi-infinity text-primary me-2"></i> PrimeVerse</h5>
+                    <p class="text-secondary">Redesigning mathematical education with interactive visual modules, advanced sieve filters, and cryptographic insights.</p>
+                    <div class="d-flex gap-2 mt-3">
+                        <a href="#" class="btn-icon"><i class="bi bi-facebook"></i></a>
+                        <a href="#" class="btn-icon"><i class="bi bi-twitter-x"></i></a>
+                        <a href="#" class="btn-icon"><i class="bi bi-linkedin"></i></a>
+                        <a href="#" class="btn-icon"><i class="bi bi-github"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-3 col-6 ms-lg-auto">
+                    <h6 class="text-white fw-bold mb-3">Links</h6>
+                    <ul class="list-unstyled d-flex flex-column gap-2" style="font-size: 0.95rem;">
+                        <li><a href="index.html" class="footer-link">Home</a></li>
+                        <li><a href="articles.html" class="footer-link">Articles</a></li>
+                        <li><a href="tools.html" class="footer-link">Interactive Tools</a></li>
+                        <li><a href="about.html" class="footer-link">About</a></li>
+                        <li><a href="contact.html" class="footer-link">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-md-3 col-6">
+                    <h6 class="text-white fw-bold mb-3">Math Tools</h6>
+                    <ul class="list-unstyled d-flex flex-column gap-2" style="font-size: 0.95rem;">
+                        <li><a href="tools.html?tool=checker" class="footer-link">Prime Checker</a></li>
+                        <li><a href="tools.html?tool=generator" class="footer-link">Prime Generator</a></li>
+                        <li><a href="tools.html?tool=factor" class="footer-link">Factorizer</a></li>
+                        <li><a href="tools.html?tool=quiz" class="footer-link">Math Quiz</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h6 class="text-white fw-bold mb-3">Contact Us</h6>
+                    <p class="text-secondary mb-1" style="font-size: 0.95rem;"><i class="bi bi-geo-alt me-2 text-primary"></i> 104 Fibonacci Way, Fractal City</p>
+                    <p class="text-secondary mb-1" style="font-size: 0.95rem;"><i class="bi bi-envelope me-2 text-primary"></i> contact@primeverse.edu</p>
+                    <p class="text-secondary" style="font-size: 0.95rem;"><i class="bi bi-telephone me-2 text-primary"></i> +1 (555) 777-1313</p>
+                </div>
+            </div>
+            <div class="border-top pt-4 mt-4 text-center" style="border-color: var(--border-color) !important; font-size: 0.9rem;">
+                <p class="mb-0 text-muted">&copy; 2026 PrimeVerse. Created with passion for mathematics. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <a href="#" id="backToTop" class="btn btn-premium rounded-circle d-flex align-items-center justify-content-center p-0" style="width: 44px; height: 44px; box-shadow: 0 4px 15px var(--primary-glow);"><i class="bi bi-arrow-up fs-5"></i></a>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    
+    <script src="js/theme.js"></script>
+    <script src="js/articles-data.js"></script>
+    <script src="js/bookmark.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Range and Distribution of Prime Numbers – PrimeVerse</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Discover how prime numbers are distributed across ranges, the Prime Number Theorem, and the density formula \( \pi(x) \approx x / \ln x \).">
+    <meta name="keywords" content="prime range, distribution of primes, prime number theorem, prime density, Gauss number theory">
+    
+    <!-- Open Graph -->
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Range and Distribution of Prime Numbers – PrimeVerse">
+    <meta property="og:description" content="Discover how prime numbers are distributed across ranges, the Prime Number Theorem, and the density formula \( \pi(x) \approx x / \ln x \).">
+    <meta property="og:image" content="assets/images/range-cover.jpg">
+
+    <!-- Stylesheets -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- KaTeX CDN for math formulas -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    
+    <style>
+        .toc-link {
+            display: block;
+            padding: 0.35rem 0;
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.2s;
+            font-size: 0.9rem;
+        }
+        .toc-link:hover, .toc-link.active {
+            color: var(--primary);
+            padding-left: 4px;
+        }
+        .sticky-sidebar {
+            position: sticky;
+            top: 90px;
+        }
+        .article-body h2 {
+            font-size: 1.6rem;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+        .article-body p {
+            margin-bottom: 1.25rem;
+            color: var(--text-secondary);
+        }
+        .math-callout {
+            border-left: 4px solid var(--primary);
+            background: rgba(124, 58, 237, 0.05);
+            border-radius: 0 12px 12px 0;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Reading Progress Bar -->
+    <div class="progress-container">
+        <div id="readingProgressBar"></div>
+    </div>
+
+    <!-- Active Article Marker for History JS -->
+    <div id="currentArticleMarker" data-id="range" class="d-none"></div>
+
+    <!-- Background Blobs -->
+    <div class="blob-container">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+
+    <!-- Navigation Header -->
+    <nav class="navbar navbar-expand-lg glass-nav sticky-top py-3">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="index.html">
+                <i class="bi bi-infinity me-2"></i> PrimeVerse
+            </a>
+            <button class="navbar-toggler border-0 text-white" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon" style="filter: invert(var(--theme-invert, 1));"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarContent">
+                <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="articles.html">Articles</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="tools.html">Interactive Tools</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contact</a>
+                    </li>
+                </ul>
+                <div class="d-flex align-items-center gap-3">
+                    <div class="theme-switch-container theme-toggle-btn">
+                        <div class="theme-switch-toggle">
+                            <i class="bi bi-moon-stars-fill"></i>
+                        </div>
+                    </div>
+                    <a href="tools.html" class="btn btn-premium rounded-pill px-4">Get Started</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Article Hero Banner -->
+    <header class="py-5 position-relative overflow-hidden">
+        <div class="container" data-nav="fade-up">
+            <nav aria-label="breadcrumb" class="mb-3">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="index.html" class="footer-link">Home</a></li>
+                    <li class="breadcrumb-item"><a href="articles.html" class="footer-link">Articles</a></li>
+                    <li class="breadcrumb-item active text-primary" aria-current="page">Range & Distribution</li>
+                </ol>
+            </nav>
+            
+            <span class="badge-category mb-3 d-inline-block">Advanced Math</span>
+            <h1 class="display-5 fw-extrabold mb-3">Range and Distribution of Prime Numbers</h1>
+            <p class="lead text-secondary mb-4" style="max-width: 800px;">
+                How are prime numbers dispersed along the number line? Explore the math behind prime counting, density sequences, and the famous Prime Number Theorem.
+            </p>
+
+            <div class="d-flex flex-wrap align-items-center justify-content-start gap-4 text-muted mb-4 card-meta">
+                <div class="d-flex align-items-center">
+                    <div class="avatar me-2 rounded-circle text-white d-flex align-items-center justify-content-center" style="width: 40px; height: 40px; background: var(--accent-gradient); font-weight: bold;">AL</div>
+                    <div>
+                        <h6 class="mb-0 text-white fw-bold">Ada Lovelace</h6>
+                        <small>Published July 4, 2026</small>
+                    </div>
+                </div>
+                <div>
+                    <span class="meta-item"><i class="bi bi-clock me-1"></i> 8 min read</span>
+                    <span class="meta-item"><i class="bi bi-eye me-1"></i> 980 views</span>
+                </div>
+                <div>
+                    <span class="badge badge-difficulty badge-medium">Medium</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Featured Image -->
+    <section class="mb-5">
+        <div class="container" data-aos="zoom-in">
+            <div class="glass-panel overflow-hidden p-0 rounded-4" style="height: 400px; max-height: 50vh;">
+                <img src="assets/images/range-cover.jpg" alt="Distribution of Primes cover" class="w-100 h-100" style="object-fit: cover;">
+            </div>
+        </div>
+    </section>
+
+    <!-- Article Body and Sidebar -->
+    <main class="container mb-5">
+        <div class="row">
+            <!-- Article Body -->
+            <div class="col-lg-8" data-aos="fade-right">
+                <article class="article-body">
+                    <div class="glass-panel p-4 p-md-5">
+                        
+                        <h2 id="concept">1. What is a Prime Range?</h2>
+                        <p>
+                            A prime number range refers to the list of prime numbers contained between a given starting integer and an ending integer. Generating primes within a specific range is a basic requirement in cryptography and scientific computations.
+                        </p>
+                        <p>
+                            For example, let's look at the distribution of primes in these smaller, common ranges:
+                        </p>
+                        <ul>
+                            <li><strong>Primes from 1 to 20:</strong> 2, 3, 5, 7, 11, 13, 17, 19 (Total: 8 primes)</li>
+                            <li><strong>Primes from 1 to 50:</strong> 2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47 (Total: 15 primes)</li>
+                            <li><strong>Primes from 1 to 100:</strong> There are exactly 25 prime numbers.</li>
+                        </ul>
+
+                        <h2 id="prime-density">2. The Density of Prime Numbers</h2>
+                        <p>
+                            Unlike multiples of 5 or even numbers, prime numbers do not occur at fixed intervals. As numbers grow larger, primes generally become sparser. However, they are not randomly scattered; their density follows a logarithmic trend.
+                        </p>
+                        <p>
+                            If we check the percentage of prime numbers in different spans:
+                        </p>
+                        <div class="table-responsive my-4">
+                            <table class="table table-bordered text-center glass-panel" style="border-color: var(--border-color) !important; color: var(--text-primary);">
+                                <thead>
+                                    <tr style="background: rgba(255, 255, 255, 0.05);">
+                                        <th>Range (\(1\) to \(x\))</th>
+                                        <th>Number of Primes</th>
+                                        <th>Percentage (%) of Primes</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>\(10\)</td>
+                                        <td>\(4\)</td>
+                                        <td>\(40.0\%\)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>\(100\)</td>
+                                        <td>\(25\)</td>
+                                        <td>\(25.0\%\)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>\(1,000\)</td>
+                                        <td>\(168\)</td>
+                                        <td>\(16.8\%\)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>\(10,000\)</td>
+                                        <td>\(1,229\)</td>
+                                        <td>\(12.29\%\)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>\(100,000\)</td>
+                                        <td>\(9,592\)</td>
+                                        <td>\(9.59\%\)</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <h2 id="sieve-concept">3. Finding Primes: Sieve Methodology</h2>
+                        <p>
+                            To find prime numbers in a range efficiently, mathematicians use sieve methods rather than testing each number individually. The most famous is the <strong>Sieve of Eratosthenes</strong> (developed in 3rd Century BC).
+                        </p>
+                        <p>
+                            By iteratively marking the multiples of each prime starting from 2, composite numbers are filtered out, leaving only prime numbers. Sieve algorithms have a time complexity of \(O(n \log \log n)\), making them extremely efficient for ranges up to several millions.
+                        </p>
+
+                        <h2 id="prime-theorem">4. The Prime Number Theorem (PNT)</h2>
+                        <p>
+                            Conjectured independently by Carl Friedrich Gauss and Adrien-Marie Legendre in the late 18th century, the <strong>Prime Number Theorem</strong> describes the asymptotic distribution of prime numbers.
+                        </p>
+                        <p>
+                            Let \( \pi(x) \) be the prime-counting function that denotes the number of primes less than or equal to \( x \). The theorem states:
+                        </p>
+                        <div class="math-callout p-3 mb-4">
+                            <strong>The Prime Number Theorem:</strong> 
+                            \[ \lim_{x \to \infty} \frac{\pi(x)}{\frac{x}{\ln x}} = 1 \]
+                            In other words, for large values of \( x \), the number of primes up to \( x \) is approximately:
+                            \[ \pi(x) \approx \frac{x}{\ln x} \]
+                        </div>
+                        <p>
+                            This means that the probability that a randomly chosen integer in the neighborhood of \( x \) is prime is approximately \( 1 / \ln x \).
+                        </p>
+
+                        <!-- Share, Like and Bookmark Buttons bottom -->
+                        <div class="d-flex flex-wrap justify-content-between align-items-center border-top pt-4 mt-5">
+                            <div class="d-flex gap-2">
+                                <button class="btn btn-premium-outline rounded-pill btn-like-toggle px-3" data-id="range" data-base-likes="87">
+                                    <i class="bi bi-heart"></i> Like (<span class="like-count">87</span>)
+                                </button>
+                                <button class="btn btn-premium-outline rounded-pill btn-bookmark-toggle px-3" data-id="range">
+                                    <i class="bi bi-bookmark"></i> Bookmark
+                                </button>
+                            </div>
+                            
+                            <div class="d-flex gap-2 align-items-center">
+                                <span class="text-muted" style="font-size: 0.9rem;">Share:</span>
+                                <button class="btn-icon btn-share-link" title="Copy Link"><i class="bi bi-link-45deg"></i></button>
+                                <a href="https://twitter.com/intent/tweet" target="_blank" class="btn-icon"><i class="bi bi-twitter-x"></i></a>
+                                <a href="https://facebook.com" target="_blank" class="btn-icon"><i class="bi bi-facebook"></i></a>
+                            </div>
+                        </div>
+
+                    </div>
+                </article>
+
+                <!-- Navigation Previous/Next -->
+                <div class="row g-3 my-4">
+                    <div class="col-md-6">
+                        <a href="features.html" class="w-100 text-decoration-none">
+                            <div class="glass-panel p-3 text-start hover-rotate">
+                                <small class="text-muted d-block"><i class="bi bi-arrow-left"></i> Previous</small>
+                                <span class="fw-bold text-white">Features of a Prime Number</span>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-md-6">
+                        <a href="cryptography.html" class="w-100 text-decoration-none">
+                            <div class="glass-panel p-3 text-end hover-rotate">
+                                <small class="text-muted d-block">Next <i class="bi bi-arrow-right"></i></small>
+                                <span class="fw-bold text-white">Primes in Cryptography</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Comments UI -->
+                <section class="glass-panel p-4 p-md-5 mb-4" id="commentsSection" data-article-id="range">
+                    <h3 class="fw-bold mb-4">Discussion Board</h3>
+                    
+                    <form id="commentForm" class="mb-4">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <input type="text" id="commentName" class="form-control glass-input" placeholder="Your Name" required>
+                            </div>
+                            <div class="col-12">
+                                <textarea id="commentMessage" rows="4" class="form-control glass-input" placeholder="Join the discussion..." required></textarea>
+                            </div>
+                            <div class="col-12 text-end">
+                                <button type="submit" class="btn btn-premium rounded-pill px-4">Post Comment</button>
+                            </div>
+                        </div>
+                    </form>
+
+                    <div id="commentsList">
+                        <!-- Injected via app.js -->
+                    </div>
+                </section>
+            </div>
+
+            <!-- Sidebar -->
+            <div class="col-lg-4">
+                <div class="sticky-sidebar">
+                    
+                    <!-- Table of Contents -->
+                    <div class="glass-panel p-4 mb-4">
+                        <h5 class="fw-bold mb-3">Table of Contents</h5>
+                        <nav id="tableOfContents">
+                            <a href="#concept" class="toc-link"><i class="bi bi-hash text-primary"></i> What is a Prime Range?</a>
+                            <a href="#prime-density" class="toc-link"><i class="bi bi-hash text-primary"></i> Density of Primes</a>
+                            <a href="#sieve-concept" class="toc-link"><i class="bi bi-hash text-primary"></i> Sieve Methodology</a>
+                            <a href="#prime-theorem" class="toc-link"><i class="bi bi-hash text-primary"></i> The Prime Theorem</a>
+                        </nav>
+                    </div>
+
+                    <!-- Author Card -->
+                    <div class="glass-panel p-4 mb-4 text-center">
+                        <div class="avatar rounded-circle text-white d-flex align-items-center justify-content-center mx-auto mb-3" style="width: 70px; height: 70px; background: var(--accent-gradient); font-size: 1.6rem; font-weight: bold;">
+                            AL
+                        </div>
+                        <h5 class="fw-bold mb-1">Ada Lovelace</h5>
+                        <p class="text-muted" style="font-size: 0.85rem;">Analytic Engine Theorist</p>
+                        <p class="text-secondary mb-0" style="font-size: 0.85rem;">
+                            Ada constructs instructions for compiling algebraic values and tracks sequence densities.
+                        </p>
+                    </div>
+
+                    <!-- Related Articles -->
+                    <div class="glass-panel p-4 mb-4">
+                        <h5 class="fw-bold mb-3">Related Articles</h5>
+                        <div class="d-flex flex-column gap-3">
+                            <div class="d-flex align-items-center">
+                                <img src="assets/images/features-cover.jpg" class="rounded me-2" style="width: 50px; height: 50px; object-fit: cover;">
+                                <div>
+                                    <h6 class="mb-0" style="font-size: 0.85rem; font-weight: 600;"><a href="features.html" class="text-white footer-link text-decoration-none">Features of a Prime</a></h6>
+                                    <small class="text-muted" style="font-size: 0.75rem;">Number Theory &bull; 5m</small>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <img src="assets/images/sieve-cover.jpg" class="rounded me-2" style="width: 50px; height: 50px; object-fit: cover;">
+                                <div>
+                                    <h6 class="mb-0" style="font-size: 0.85rem; font-weight: 600;"><a href="sieve.html" class="text-white footer-link text-decoration-none">Sieve of Eratosthenes</a></h6>
+                                    <small class="text-muted" style="font-size: 0.75rem;">Algorithms &bull; 6m</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Recently Viewed -->
+                    <div class="glass-panel p-4">
+                        <h5 class="fw-bold mb-3">Recently Viewed</h5>
+                        <div id="recentArticlesList">
+                            <!-- Injected via app.js -->
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer py-5">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6">
+                    <h5 class="fw-bold text-white mb-3"><i class="bi bi-infinity text-primary me-2"></i> PrimeVerse</h5>
+                    <p class="text-secondary">Redesigning mathematical education with interactive visual modules, advanced sieve filters, and cryptographic insights.</p>
+                    <div class="d-flex gap-2 mt-3">
+                        <a href="#" class="btn-icon"><i class="bi bi-facebook"></i></a>
+                        <a href="#" class="btn-icon"><i class="bi bi-twitter-x"></i></a>
+                        <a href="#" class="btn-icon"><i class="bi bi-linkedin"></i></a>
+                        <a href="#" class="btn-icon"><i class="bi bi-github"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-3 col-6 ms-lg-auto">
+                    <h6 class="text-white fw-bold mb-3">Links</h6>
+                    <ul class="list-unstyled d-flex flex-column gap-2" style="font-size: 0.95rem;">
+                        <li><a href="index.html" class="footer-link">Home</a></li>
+                        <li><a href="articles.html" class="footer-link">Articles</a></li>
+                        <li><a href="tools.html" class="footer-link">Interactive Tools</a></li>
+                        <li><a href="about.html" class="footer-link">About</a></li>
+                        <li><a href="contact.html" class="footer-link">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-md-3 col-6">
+                    <h6 class="text-white fw-bold mb-3">Math Tools</h6>
+                    <ul class="list-unstyled d-flex flex-column gap-2" style="font-size: 0.95rem;">
+                        <li><a href="tools.html?tool=checker" class="footer-link">Prime Checker</a></li>
+                        <li><a href="tools.html?tool=generator" class="footer-link">Prime Generator</a></li>
+                        <li><a href="tools.html?tool=factor" class="footer-link">Factorizer</a></li>
+                        <li><a href="tools.html?tool=quiz" class="footer-link">Math Quiz</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h6 class="text-white fw-bold mb-3">Contact Us</h6>
+                    <p class="text-secondary mb-1" style="font-size: 0.95rem;"><i class="bi bi-geo-alt me-2 text-primary"></i> 104 Fibonacci Way, Fractal City</p>
+                    <p class="text-secondary mb-1" style="font-size: 0.95rem;"><i class="bi bi-envelope me-2 text-primary"></i> contact@primeverse.edu</p>
+                    <p class="text-secondary" style="font-size: 0.95rem;"><i class="bi bi-telephone me-2 text-primary"></i> +1 (555) 777-1313</p>
+                </div>
+            </div>
+            <div class="border-top pt-4 mt-4 text-center" style="border-color: var(--border-color) !important; font-size: 0.9rem;">
+                <p class="mb-0 text-muted">&copy; 2026 PrimeVerse. Created with passion for mathematics. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <a href="#" id="backToTop" class="btn btn-premium rounded-circle d-flex align-items-center justify-content-center p-0" style="width: 44px; height: 44px; box-shadow: 0 4px 15px var(--primary-glow);"><i class="bi bi-arrow-up fs-5"></i></a>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    
+    <script src="js/theme.js"></script>
+    <script src="js/articles-data.js"></script>
+    <script src="js/bookmark.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

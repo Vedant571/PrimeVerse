@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prime Numbers in Cryptography – PrimeVerse</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Learn how prime numbers power modern digital security, explore the mathematics of RSA cryptography, and understand the difficulty of prime factorization.">
+    <meta name="keywords" content="cryptography, RSA encryption, prime factorization, Euler totient, security algorithm">
+    
+    <!-- Open Graph -->
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Prime Numbers in Cryptography – PrimeVerse">
+    <meta property="og:description" content="Learn how prime numbers power modern digital security, explore the mathematics of RSA cryptography, and understand the difficulty of prime factorization.">
+    <meta property="og:image" content="assets/images/cryptography-cover.jpg">
+
+    <!-- Stylesheets -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- KaTeX CDN for math formulas -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    
+    <style>
+        .toc-link {
+            display: block;
+            padding: 0.35rem 0;
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.2s;
+            font-size: 0.9rem;
+        }
+        .toc-link:hover, .toc-link.active {
+            color: var(--primary);
+            padding-left: 4px;
+        }
+        .sticky-sidebar {
+            position: sticky;
+            top: 90px;
+        }
+        .article-body h2 {
+            font-size: 1.6rem;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+        .article-body p {
+            margin-bottom: 1.25rem;
+            color: var(--text-secondary);
+        }
+        .math-callout {
+            border-left: 4px solid var(--primary);
+            background: rgba(124, 58, 237, 0.05);
+            border-radius: 0 12px 12px 0;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Reading Progress Bar -->
+    <div class="progress-container">
+        <div id="readingProgressBar"></div>
+    </div>
+
+    <!-- Active Article Marker for History JS -->
+    <div id="currentArticleMarker" data-id="cryptography" class="d-none"></div>
+
+    <!-- Background Blobs -->
+    <div class="blob-container">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+
+    <!-- Navigation Header -->
+    <nav class="navbar navbar-expand-lg glass-nav sticky-top py-3">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="index.html">
+                <i class="bi bi-infinity me-2"></i> PrimeVerse
+            </a>
+            <button class="navbar-toggler border-0 text-white" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon" style="filter: invert(var(--theme-invert, 1));"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarContent">
+                <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="articles.html">Articles</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="tools.html">Interactive Tools</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contact</a>
+                    </li>
+                </ul>
+                <div class="d-flex align-items-center gap-3">
+                    <div class="theme-switch-container theme-toggle-btn">
+                        <div class="theme-switch-toggle">
+                            <i class="bi bi-moon-stars-fill"></i>
+                        </div>
+                    </div>
+                    <a href="tools.html" class="btn btn-premium rounded-pill px-4">Get Started</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Article Hero Banner -->
+    <header class="py-5 position-relative overflow-hidden">
+        <div class="container" data-aos="fade-up">
+            <nav aria-label="breadcrumb" class="mb-3">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="index.html" class="footer-link">Home</a></li>
+                    <li class="breadcrumb-item"><a href="articles.html" class="footer-link">Articles</a></li>
+                    <li class="breadcrumb-item active text-primary" aria-current="page">Primes in Cryptography</li>
+                </ol>
+            </nav>
+            
+            <span class="badge-category mb-3 d-inline-block">Cryptography</span>
+            <h1 class="display-5 fw-extrabold mb-3">Prime Numbers in Cryptography: Securing the Internet</h1>
+            <p class="lead text-secondary mb-4" style="max-width: 800px;">
+                Delve into how prime factorization forms the foundation of modern cryptography schemes like RSA, protecting your data online.
+            </p>
+
+            <div class="d-flex flex-wrap align-items-center justify-content-start gap-4 text-muted mb-4 card-meta">
+                <div class="d-flex align-items-center">
+                    <div class="avatar me-2 rounded-circle text-white d-flex align-items-center justify-content-center" style="width: 40px; height: 40px; background: var(--accent-gradient); font-weight: bold;">GH</div>
+                    <div>
+                        <h6 class="mb-0 text-white fw-bold">Dr. Grace Hopper</h6>
+                        <small>Published July 7, 2026</small>
+                    </div>
+                </div>
+                <div>
+                    <span class="meta-item"><i class="bi bi-clock me-1"></i> 12 min read</span>
+                    <span class="meta-item"><i class="bi bi-eye me-1"></i> 2,150 views</span>
+                </div>
+                <div>
+                    <span class="badge badge-difficulty badge-hard">Hard</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Featured Image -->
+    <section class="mb-5">
+        <div class="container" data-aos="zoom-in">
+            <div class="glass-panel overflow-hidden p-0 rounded-4" style="height: 400px; max-height: 50vh;">
+                <img src="assets/images/cryptography-cover.jpg" alt="Cryptography Cover" class="w-100 h-100" style="object-fit: cover;">
+            </div>
+        </div>
+    </section>
+
+    <!-- Article Body and Sidebar -->
+    <main class="container mb-5">
+        <div class="row">
+            <!-- Article Body -->
+            <div class="col-lg-8" data-aos="fade-right">
+                <article class="article-body">
+                    <div class="glass-panel p-4 p-md-5">
+                        
+                        <h2 id="intro">1. The Security Paradox</h2>
+                        <p>
+                            Every time you input your credit card number, log in to email, or load an HTTPS page, your browser relies on a paradox: it uses a public key that anyone can see to encrypt data, but requires a private key that only the recipient has to decrypt it. This asymmetry is at the heart of public-key cryptography.
+                        </p>
+                        <p>
+                            The core mathematical engine behind this asymmetry is the prime number. Specifically, the fact that multiplying two large primes is easy, but factoring their product back into the original primes is incredibly difficult.
+                        </p>
+
+                        <h2 id="asymmetry">2. Prime Multiplication vs. Factorization</h2>
+                        <p>
+                            Consider two moderately sized prime numbers:
+                            \[ p = 61 \quad \text{and} \quad q = 53 \]
+                            Multiplying them is basic arithmetic:
+                            \[ n = p \times q = 61 \times 53 = 3233 \]
+                            Now imagine you are handed the number \( 3233 \) and asked to find its prime factors. Without prior knowledge, you would have to run test divisions by every prime up to \( \sqrt{3233} \approx 57 \).
+                        </p>
+                        <p>
+                            In real-world security schemes (like RSA-2048), the prime factors chosen are hundreds of digits long. While a supercomputer can multiply them in milliseconds, finding the original factors from their product would take billions of years with modern computational resources. This is known as a <strong>one-way function with a trapdoor</strong>.
+                        </p>
+
+                        <h2 id="rsa-mechanics">3. The RSA Encryption Scheme</h2>
+                        <p>
+                            Invented in 1977 by Ron Rivest, Adi Shamir, and Leonard Adleman, the RSA algorithm leverages the properties of prime numbers and modular arithmetic. Here is how key generation works:
+                        </p>
+                        <ol>
+                            <li>Choose two distinct large prime numbers \( p \) and \( q \).</li>
+                            <li>Compute their product \( n = pq \). The length of \( n \) is the key length.</li>
+                            <li>Compute Euler's totient function:
+                                \[ \phi(n) = (p-1)(q-1) \]
+                            </li>
+                            <li>Choose an integer \( e \) (the public exponent) such that \( 1 < e < \phi(n) \) and \( \gcd(e, \phi(n)) = 1 \). (Often, \( 65537 \) is used).</li>
+                            <li>Compute \( d \), the modular multiplicative inverse of \( e \pmod{\phi(n)} \), which satisfies:
+                                \[ de \equiv 1 \pmod{\phi(n)} \]
+                            </li>
+                        </ol>
+                        <div class="math-callout p-3 mb-4">
+                            <strong>Keys Summary:</strong>
+                            <ul>
+                                <li><strong>Public Key:</strong> \( (e, n) \) – distributed publicly to encrypt messages.</li>
+                                <li><strong>Private Key:</strong> \( (d, n) \) – kept secret to decrypt messages.</li>
+                            </ul>
+                        </div>
+
+                        <h2 id="encryption-decryption">4. Modular Arithmetic Encrypting</h2>
+                        <p>
+                            To encrypt a message represented as an integer \( m \) (where \( 0 \le m < n \)):
+                            \[ c \equiv m^e \pmod n \]
+                            To decrypt the ciphertext \( c \):
+                            \[ m \equiv c^d \pmod n \]
+                            This restoration works because of Fermat's Little Theorem and Euler's Theorem, which mathematically link exponentiation modulo a product of primes back to the initial value.
+                        </p>
+
+                        <h2 id="future">5. Quantum Threats to Prime Cryptography</h2>
+                        <p>
+                            The security of RSA rests entirely on the assumption that prime factorization is slow. However, in 1994, Peter Shor published **Shor's Algorithm**, a quantum computer algorithm capable of finding prime factors in polynomial time.
+                        </p>
+                        <p>
+                            When large-scale quantum computers become viable, traditional prime-based cryptography will be compromised, driving modern research toward **post-quantum cryptography** (such as lattice-based cryptography).
+                        </p>
+
+                        <!-- Share, Like and Bookmark Buttons bottom -->
+                        <div class="d-flex flex-wrap justify-content-between align-items-center border-top pt-4 mt-5">
+                            <div class="d-flex gap-2">
+                                <button class="btn btn-premium-outline rounded-pill btn-like-toggle px-3" data-id="cryptography" data-base-likes="310">
+                                    <i class="bi bi-heart"></i> Like (<span class="like-count">310</span>)
+                                </button>
+                                <button class="btn btn-premium-outline rounded-pill btn-bookmark-toggle px-3" data-id="cryptography">
+                                    <i class="bi bi-bookmark"></i> Bookmark
+                                </button>
+                            </div>
+                            
+                            <div class="d-flex gap-2 align-items-center">
+                                <span class="text-muted" style="font-size: 0.9rem;">Share:</span>
+                                <button class="btn-icon btn-share-link" title="Copy Link"><i class="bi bi-link-45deg"></i></button>
+                                <a href="https://twitter.com/intent/tweet" target="_blank" class="btn-icon"><i class="bi bi-twitter-x"></i></a>
+                                <a href="https://facebook.com" target="_blank" class="btn-icon"><i class="bi bi-facebook"></i></a>
+                            </div>
+                        </div>
+
+                    </div>
+                </article>
+
+                <!-- Navigation Previous/Next -->
+                <div class="row g-3 my-4">
+                    <div class="col-md-6">
+                        <a href="range.html" class="w-100 text-decoration-none">
+                            <div class="glass-panel p-3 text-start hover-rotate">
+                                <small class="text-muted d-block"><i class="bi bi-arrow-left"></i> Previous</small>
+                                <span class="fw-bold text-white">Range & Distribution of Primes</span>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-md-6">
+                        <a href="sieve.html" class="w-100 text-decoration-none">
+                            <div class="glass-panel p-3 text-end hover-rotate">
+                                <small class="text-muted d-block">Next <i class="bi bi-arrow-right"></i></small>
+                                <span class="fw-bold text-white">Sieve of Eratosthenes</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Comments UI -->
+                <section class="glass-panel p-4 p-md-5 mb-4" id="commentsSection" data-article-id="cryptography">
+                    <h3 class="fw-bold mb-4">Discussion Board</h3>
+                    
+                    <form id="commentForm" class="mb-4">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <input type="text" id="commentName" class="form-control glass-input" placeholder="Your Name" required>
+                            </div>
+                            <div class="col-12">
+                                <textarea id="commentMessage" rows="4" class="form-control glass-input" placeholder="Join the discussion..." required></textarea>
+                            </div>
+                            <div class="col-12 text-end">
+                                <button type="submit" class="btn btn-premium rounded-pill px-4">Post Comment</button>
+                            </div>
+                        </div>
+                    </form>
+
+                    <div id="commentsList">
+                        <!-- Injected via app.js -->
+                    </div>
+                </section>
+            </div>
+
+            <!-- Sidebar -->
+            <div class="col-lg-4">
+                <div class="sticky-sidebar">
+                    
+                    <!-- Table of Contents -->
+                    <div class="glass-panel p-4 mb-4">
+                        <h5 class="fw-bold mb-3">Table of Contents</h5>
+                        <nav id="tableOfContents">
+                            <a href="#intro" class="toc-link"><i class="bi bi-hash text-primary"></i> Security Paradox</a>
+                            <a href="#asymmetry" class="toc-link"><i class="bi bi-hash text-primary"></i> Factoring vs. Multiplying</a>
+                            <a href="#rsa-mechanics" class="toc-link"><i class="bi bi-hash text-primary"></i> RSA Keys Setup</a>
+                            <a href="#encryption-decryption" class="toc-link"><i class="bi bi-hash text-primary"></i> Modulo Encrypting</a>
+                            <a href="#future" class="toc-link"><i class="bi bi-hash text-primary"></i> Quantum Threats</a>
+                        </nav>
+                    </div>
+
+                    <!-- Author Card -->
+                    <div class="glass-panel p-4 mb-4 text-center">
+                        <div class="avatar rounded-circle text-white d-flex align-items-center justify-content-center mx-auto mb-3" style="width: 70px; height: 70px; background: var(--accent-gradient); font-size: 1.6rem; font-weight: bold;">
+                            GH
+                        </div>
+                        <h5 class="fw-bold mb-1">Dr. Grace Hopper</h5>
+                        <p class="text-muted" style="font-size: 0.85rem;">Cryptology Scholar & Compiler Engineer</p>
+                        <p class="text-secondary mb-0" style="font-size: 0.85rem;">
+                            Grace designs compiler systems and investigates cryptographic trapping functions in prime models.
+                        </p>
+                    </div>
+
+                    <!-- Related Articles -->
+                    <div class="glass-panel p-4 mb-4">
+                        <h5 class="fw-bold mb-3">Related Articles</h5>
+                        <div class="d-flex flex-column gap-3">
+                            <div class="d-flex align-items-center">
+                                <img src="assets/images/features-cover.jpg" class="rounded me-2" style="width: 50px; height: 50px; object-fit: cover;">
+                                <div>
+                                    <h6 class="mb-0" style="font-size: 0.85rem; font-weight: 600;"><a href="features.html" class="text-white footer-link text-decoration-none">Features of a Prime</a></h6>
+                                    <small class="text-muted" style="font-size: 0.75rem;">Number Theory &bull; 5m</small>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <img src="assets/images/range-cover.jpg" class="rounded me-2" style="width: 50px; height: 50px; object-fit: cover;">
+                                <div>
+                                    <h6 class="mb-0" style="font-size: 0.85rem; font-weight: 600;"><a href="range.html" class="text-white footer-link text-decoration-none">Range & Distribution</a></h6>
+                                    <small class="text-muted" style="font-size: 0.75rem;">Advanced Math &bull; 8m</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Recently Viewed -->
+                    <div class="glass-panel p-4">
+                        <h5 class="fw-bold mb-3">Recently Viewed</h5>
+                        <div id="recentArticlesList">
+                            <!-- Injected via app.js -->
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer py-5">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6">
+                    <h5 class="fw-bold text-white mb-3"><i class="bi bi-infinity text-primary me-2"></i> PrimeVerse</h5>
+                    <p class="text-secondary">Redesigning mathematical education with interactive visual modules, advanced sieve filters, and cryptographic insights.</p>
+                    <div class="d-flex gap-2 mt-3">
+                        <a href="#" class="btn-icon"><i class="bi bi-facebook"></i></a>
+                        <a href="#" class="btn-icon"><i class="bi bi-twitter-x"></i></a>
+                        <a href="#" class="btn-icon"><i class="bi bi-linkedin"></i></a>
+                        <a href="#" class="btn-icon"><i class="bi bi-github"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-3 col-6 ms-lg-auto">
+                    <h6 class="text-white fw-bold mb-3">Links</h6>
+                    <ul class="list-unstyled d-flex flex-column gap-2" style="font-size: 0.95rem;">
+                        <li><a href="index.html" class="footer-link">Home</a></li>
+                        <li><a href="articles.html" class="footer-link">Articles</a></li>
+                        <li><a href="tools.html" class="footer-link">Interactive Tools</a></li>
+                        <li><a href="about.html" class="footer-link">About</a></li>
+                        <li><a href="contact.html" class="footer-link">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-md-3 col-6">
+                    <h6 class="text-white fw-bold mb-3">Math Tools</h6>
+                    <ul class="list-unstyled d-flex flex-column gap-2" style="font-size: 0.95rem;">
+                        <li><a href="tools.html?tool=checker" class="footer-link">Prime Checker</a></li>
+                        <li><a href="tools.html?tool=generator" class="footer-link">Prime Generator</a></li>
+                        <li><a href="tools.html?tool=factor" class="footer-link">Factorizer</a></li>
+                        <li><a href="tools.html?tool=quiz" class="footer-link">Math Quiz</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h6 class="text-white fw-bold mb-3">Contact Us</h6>
+                    <p class="text-secondary mb-1" style="font-size: 0.95rem;"><i class="bi bi-geo-alt me-2 text-primary"></i> 104 Fibonacci Way, Fractal City</p>
+                    <p class="text-secondary mb-1" style="font-size: 0.95rem;"><i class="bi bi-envelope me-2 text-primary"></i> contact@primeverse.edu</p>
+                    <p class="text-secondary" style="font-size: 0.95rem;"><i class="bi bi-telephone me-2 text-primary"></i> +1 (555) 777-1313</p>
+                </div>
+            </div>
+            <div class="border-top pt-4 mt-4 text-center" style="border-color: var(--border-color) !important; font-size: 0.9rem;">
+                <p class="mb-0 text-muted">&copy; 2026 PrimeVerse. Created with passion for mathematics. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <a href="#" id="backToTop" class="btn btn-premium rounded-circle d-flex align-items-center justify-content-center p-0" style="width: 44px; height: 44px; box-shadow: 0 4px 15px var(--primary-glow);"><i class="bi bi-arrow-up fs-5"></i></a>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    
+    <script src="js/theme.js"></script>
+    <script src="js/articles-data.js"></script>
+    <script src="js/bookmark.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

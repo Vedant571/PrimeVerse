@@ -1,0 +1,26 @@
+# IDE and Editor configs
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.swp
+
+# OS System Files
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Agent Configurations and System Logs
+.agents/
+.gemini/
+brain/
+scratch/
+task-*.log
+*.log
+
+# Build and Node dependencies (if any)
+node_modules/
+dist/
+build/
